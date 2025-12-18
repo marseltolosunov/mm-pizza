@@ -8,6 +8,8 @@ import PizzaDetailPage from './pages/PizzaDetailPage';
 import FavoritesPage from './pages/FavoritesPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import BookingPage from './pages/BookingPage';
+import MyBookingsPage from './pages/MyBookingsPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ function App() {
             </Link>
             <nav className="nav">
               <Link to="/">Главная</Link>
+              <Link to="/booking">Бронирование</Link>
               <Link to="/favorites" className="favorites-link">
                 Избранное 
                 {favorites.length > 0 && (
@@ -38,6 +41,7 @@ function App() {
               
               {isAuthenticated ? (
                 <>
+                  <Link to="/my-bookings">Мои брони</Link>
                   <span className="user-info">Привет, {user?.name}!</span>
                   <button onClick={handleLogout} className="btn-logout">
                     Выйти
@@ -62,6 +66,18 @@ function App() {
               path="/favorites" 
               element={
                 isAuthenticated ? <FavoritesPage /> : <Navigate to="/login" />
+              } 
+            />
+            <Route 
+              path="/booking" 
+              element={
+                isAuthenticated ? <BookingPage /> : <Navigate to="/login" />
+              } 
+            />
+            <Route 
+              path="/my-bookings" 
+              element={
+                isAuthenticated ? <MyBookingsPage /> : <Navigate to="/login" />
               } 
             />
             <Route path="/login" element={<LoginPage />} />
